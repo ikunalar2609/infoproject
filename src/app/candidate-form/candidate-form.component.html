@@ -1,0 +1,47 @@
+<!-- candidate-form.component.html -->
+
+<div class="form-container">
+  <h2>Candidate Form</h2>
+  <form [formGroup]="candidateForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="fullName">Full Name:*</label>
+      <input type="text" id="fullName" formControlName="fullName" required>
+      <div *ngIf="candidateForm.get('fullName')!.hasError('required') && candidateForm.get('fullName')" class="error-message">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:*</label>
+      <input type="email" id="email" formControlName="email" required>
+      <div *ngIf="candidateForm.get('email')!.hasError('required') && candidateForm.get('email')" class="error-message">
+      </div>
+      <div *ngIf="candidateForm.get('email')!.hasError('email') && candidateForm.get('email')" class="error-message">
+      </div>
+    </div>
+
+    <div class="form-group ">
+      <label for="contactNumber">Contact Number:*</label>
+      <input type="number" id="contactNumber" formControlName="contactNumber" required>
+      <div *ngIf="candidateForm.get('contactNumber')!.hasError('required') && candidateForm.get('contactNumber')" class="error-message">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="appliedFor">Applied For:*</label>
+      <select id="appliedFor" formControlName="appliedFor" required>
+        <option value="" disabled>Select an option</option>
+        <option *ngFor="let requirement of requirements" [value]="requirement.title">{{ requirement.title }}</option>
+      </select>
+      <div *ngIf="candidateForm.get('appliedFor')!.hasError('required') && candidateForm.get('appliedFor')!.touched" class="error-message">
+        Applied For is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="remarks">Remarks:</label>
+      <textarea id="remarks" formControlName="remarks"></textarea>
+    </div>
+
+    <button type="submit" class="submit-button">Submit</button>
+  </form>
+</div>
